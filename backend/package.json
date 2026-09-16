@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "setup-db": "node src/config/setupDatabase.js",
+    "create-indexes": "node src/config/createIndexes.js",
+    "seed-db": "node src/config/seedDatabase.js"
   },
   "keywords": [],
   "author": "",
