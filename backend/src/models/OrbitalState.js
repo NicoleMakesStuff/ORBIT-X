@@ -20,7 +20,18 @@ const orbitalStateSchema = new mongoose.Schema(
             altitude_km: Number
         },
 
-        velocity_km_s: Number,
+        velocity: {
+            x_km_s: Number,
+            y_km_s: Number,
+            z_km_s: Number
+        },
+
+        propagation_method: {
+            type: String,
+            default: "SGP4"
+        },
+
+        tle_epoch: Date,
 
         orbital: {
             inclination_deg: Number,
