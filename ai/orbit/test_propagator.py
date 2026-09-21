@@ -1,92 +1,95 @@
-import os
-from pathlib import Path
+import unittest
+from datetime import datetime, timezone
 
-from dotenv import load_dotenv
-from pymongo import MongoClient
-
-from propagator import propagate_tle
+from .propagation import propagate_tle
 
 
-# --------------------------------------------------
-# Load ORBIT-X environment
-# --------------------------------------------------
+class PropagationIntegrationTests(unittest.TestCase):
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-ENV_FILE = PROJECT_ROOT / "backend" / ".env"
+    NORAD_ID = 25544
 
-load_dotenv(ENV_FILE)
-
-MONGODB_URI = os.getenv("MONGODB_URI")
-DB_NAME = os.getenv("MONGODB_DB_NAME", "orbit_x")
-
-
-# --------------------------------------------------
-# Connect to MongoDB Atlas
-# --------------------------------------------------
-
-client = MongoClient(MONGODB_URI)
-
-db = client[DB_NAME]
-
-satellite = db["satellites"].find_one({
-    "norad_id": 25544
-})
-
-
-# --------------------------------------------------
-# Make sure satellite exists
-# --------------------------------------------------
-
-if satellite is None:
-    raise RuntimeError(
-        "NORAD 25544 was not found in the satellites collection."
+    LINE1 = (
+        "1 25544U 98067A   26261.14280072  "
+        ".00012585  00000-0  23156-3 0  9990"
     )
 
+    LINE2 = (
+        "2 25544  51.6351  78.3284 0002366 "
+        "103.3218 256.8207 15.49232739533616"
+    )
 
-# --------------------------------------------------
-# Get TLE
-# --------------------------------------------------
+    def test_iss_propagation(self):
 
-line1 = satellite["tle"]["line1"]
-line2 = satellite["tle"]["line2"]
+        timestamp = datetime.now(
+            timezone.utc
+        )
 
-print("Satellite:", satellite["name"])
-print("NORAD ID:", satellite["norad_id"])
-print()
-print("TLE Line 1:")
-print(line1)
-print()
-print("TLE Line 2:")
-print(line2)
-print()
+        result = propagate_tle(
+            self.NORAD_ID,
+            self.LINE1,
+            self.LINE2,
+            timestamp,
+        )
+
+        self.assertIn(
+            "position",
+            result
+        )
+
+        self.assertIn(
+            "velocity",
+            result
+        )
+
+        self.assertIn(
+            "orbital",
+            result
+        )
+
+        self.assertIn(
+            "tle_epoch",
+            result
+        )
+
+        position = result["position"]
+
+        self.assertIn(
+            "latitude",
+            position
+        )
+
+        self.assertIn(
+            "longitude",
+            position
+        )
+
+        self.assertIn(
+            "altitude_km",
+            position
+        )
+
+        self.assertGreater(
+            position["altitude_km"],
+            300
+        )
+
+        self.assertLess(
+            position["altitude_km"],
+            500
+        )
+
+    def test_timezone_is_required(self):
+
+        timestamp = datetime.now()
+
+        with self.assertRaises(ValueError):
+            propagate_tle(
+                self.NORAD_ID,
+                self.LINE1,
+                self.LINE2,
+                timestamp,
+            )
 
 
-# --------------------------------------------------
-# Propagate
-# --------------------------------------------------
-
-result = propagate_tle(
-    line1,
-    line2
-)
-
-
-# --------------------------------------------------
-# Display result
-# --------------------------------------------------
-
-print("SGP4 propagation successful!")
-print()
-print("Position (km):")
-print(result["position_km"])
-
-print()
-print("Velocity (km/s):")
-print(result["velocity_km_s"])
-
-print()
-print("Timestamp:")
-print(result["timestamp"])
-
-
-client.close()
+if __name__ == "__main__":
+    unittest.main()
