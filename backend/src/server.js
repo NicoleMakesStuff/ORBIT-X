@@ -1,21 +1,11 @@
-require("dotenv").config();
+const path = require("path");
 
-const express = require("express");
-const cors = require("cors");
+require("dotenv").config({
+    path: path.resolve(__dirname, "../../.env")
+});
 
 const connectDatabase = require("./config/database");
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.json({
-        project: "ORBIT-X",
-        status: "online"
-    });
-});
+const app = require("./app");
 
 const PORT = process.env.PORT || 5000;
 
