@@ -26,6 +26,8 @@ const orbitalStateSchema = new mongoose.Schema(
             z_km_s: Number
         },
 
+        velocity_km_s: Number,
+
         propagation_method: {
             type: String,
             default: "SGP4"

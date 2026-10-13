@@ -104,6 +104,12 @@ def propagate(
             "altitude_km": altitude
         },
 
+        "velocity": {
+            "x_km_s": vx,
+            "y_km_s": vy,
+            "z_km_s": vz
+        },
+
         "velocity_km_s": velocity_magnitude,
 
         "timestamp": timestamp
@@ -158,6 +164,9 @@ def main():
 
                 "position":
                     result["position"],
+
+                "velocity":
+                    result["velocity"],
 
                 "velocity_km_s":
                     result["velocity_km_s"],

@@ -273,6 +273,12 @@ def propagate_tle(
             "z_km_s": velocity[2],
         },
 
+        "velocity_km_s": math.sqrt(
+            velocity[0] ** 2
+            + velocity[1] ** 2
+            + velocity[2] ** 2
+        ),
+
         "orbital": {
             "inclination_deg": inclination_deg,
             "period_minutes": period_minutes,

@@ -16,12 +16,19 @@ const ACKNOWLEDGEMENT_STATES = [
     "ACKNOWLEDGED",
     "RESOLVED"
 ];
+const SEVERITY_STATES = Alert.schema.path("severity").enumValues;
 
 app.use(cors());
 app.use(express.json());
 
 const parseLimit = (value) => {
-    const limit = Number.parseInt(value || "20", 10);
+    const rawValue = value === undefined ? "20" : `${value}`;
+    if (!/^\d+$/.test(rawValue)) {
+        const error = new Error("limit must be an integer between 1 and 100");
+        error.status = 400;
+        throw error;
+    }
+    const limit = Number(rawValue);
     if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
         const error = new Error("limit must be an integer between 1 and 100");
         error.status = 400;
@@ -31,7 +38,12 @@ const parseLimit = (value) => {
 };
 
 const parseNoradId = (value) => {
-    const noradId = Number.parseInt(value, 10);
+    if (!/^\d+$/.test(`${value}`)) {
+        const error = new Error("noradId must be a positive integer");
+        error.status = 400;
+        throw error;
+    }
+    const noradId = Number(value);
     if (!Number.isInteger(noradId) || noradId < 1) {
         const error = new Error("noradId must be a positive integer");
         error.status = 400;
@@ -223,7 +235,13 @@ app.get("/api/alerts", async (req, res, next) => {
             filter.satellite_id = parseNoradId(req.query.satelliteId);
         }
         if (req.query.severity !== undefined) {
-            filter.severity = parseRequiredString(req.query.severity, "severity").toUpperCase();
+            const severity = parseRequiredString(req.query.severity, "severity").toUpperCase();
+            if (!SEVERITY_STATES.includes(severity)) {
+                const error = new Error("invalid severity");
+                error.status = 400;
+                throw error;
+            }
+            filter.severity = severity;
         }
         if (req.query.acknowledgement !== undefined) {
             const acknowledgement = parseRequiredString(

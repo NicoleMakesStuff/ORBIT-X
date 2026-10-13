@@ -55,6 +55,12 @@ test("Person 3 API validates requests without a database connection", async () =
         const invalidEvents = await request(server, "/api/communication-events?satelliteId=bad");
         assert.equal(invalidEvents.status, 400);
 
+        const invalidLimit = await request(server, "/api/satellites?limit=20junk");
+        assert.equal(invalidLimit.status, 400);
+
+        const invalidSeverity = await request(server, "/api/alerts?severity=urgent");
+        assert.equal(invalidSeverity.status, 400);
+
         const invalidStation = await request(server, "/api/ground-stations/%20");
         assert.equal(invalidStation.status, 400);
 

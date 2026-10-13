@@ -43,7 +43,7 @@ class TLEValidatorTests(unittest.TestCase):
 
         if not mongo_uri:
             raise RuntimeError(
-                f"MONGO_URI not found in {env_path}"
+                f"MONGODB_URI not found in {env_path}"
             )
 
         cls.client = MongoClient(

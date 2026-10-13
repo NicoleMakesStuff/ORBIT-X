@@ -63,7 +63,7 @@ def main() -> None:
 
     load_dotenv(
         dotenv_path=env_path,
-        override=True
+        override=False
     )
 
     # --------------------------------------------------
