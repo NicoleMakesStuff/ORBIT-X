@@ -16,7 +16,7 @@ from tle_updater import compare_tle_epochs, save_tle_history
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-ENV_FILE = PROJECT_ROOT / "backend" / ".env"
+ENV_FILE = PROJECT_ROOT / ".env"
 
 load_dotenv(ENV_FILE)
 
@@ -34,7 +34,7 @@ SATELLITES = [
 
 if not MONGODB_URI:
     raise RuntimeError(
-        "MONGODB_URI was not found in backend/.env"
+        "MONGODB_URI was not found in the project root .env"
     )
 
 

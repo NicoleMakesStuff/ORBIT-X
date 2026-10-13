@@ -54,14 +54,10 @@ def main() -> None:
     )
 
     # --------------------------------------------------
-    # Load backend/.env explicitly
+    # Load the project root .env explicitly
     # --------------------------------------------------
 
-    env_path = os.path.join(
-        project_root,
-        "backend",
-        ".env"
-    )
+    env_path = os.path.join(project_root, ".env")
 
     print(f"Loading environment from: {env_path}")
 

@@ -15,7 +15,7 @@ class TLEValidatorTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """
-        Load MongoDB configuration from backend/.env
+        Load MongoDB configuration from the project root .env
         and connect to the orbit_x database.
         """
 
@@ -28,12 +28,8 @@ class TLEValidatorTests(unittest.TestCase):
             )
         )
 
-        # ORBIT-X/backend/.env
-        env_path = os.path.join(
-            project_root,
-            "backend",
-            ".env"
-        )
+        # ORBIT-X/.env
+        env_path = os.path.join(project_root, ".env")
 
         print(f"\nLoading environment from: {env_path}")
 
