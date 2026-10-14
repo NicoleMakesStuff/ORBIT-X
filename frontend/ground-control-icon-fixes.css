@@ -1,0 +1,253 @@
+/* ORBIT-X: navigation icon alignment and UI consistency */
+
+/* Keep all elements sized predictably */
+* {
+  box-sizing: border-box;
+}
+
+/* Navigation layout */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav button {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 10px;
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  line-height: 1.4;
+  text-align: left;
+  white-space: normal;
+}
+
+.nav .ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+  font-family: "Segoe UI Symbol", "Apple Symbols", sans-serif;
+  font-size: 15px;
+  text-align: center;
+}
+
+.nav button .count {
+  justify-self: end;
+  margin-left: 0;
+}
+
+/* Keep sidebar headings aligned */
+.nav-label {
+  padding-left: 12px;
+  line-height: 1.5;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  line-height: 1;
+  text-align: center;
+}
+
+.brand-name,
+.brand-sub {
+  line-height: 1.4;
+}
+
+/* Align toolbar controls */
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.live-pill,
+.mode-pill,
+.icon-btn,
+.outline-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Align metric icons and labels */
+.metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.metric-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Status indicators should stay circular */
+.dot,
+.legend-dot {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50% !important;
+  vertical-align: middle;
+  box-shadow: none;
+}
+
+/* Satellite fleet symbols */
+.sat-orb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 35px;
+  line-height: 1;
+}
+
+/* Prevent satellite names and status tags from colliding */
+.sat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sat-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sat-name {
+  overflow-wrap: anywhere;
+}
+
+.sat-row > .tag {
+  flex: 0 0 auto;
+}
+
+/* Ground station symbols */
+.station-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.station-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Alert symbols and severity indicators */
+.alert-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-stripe {
+  flex: 0 0 3px;
+  align-self: stretch;
+}
+
+.alert-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Consistent prediction-map markers */
+.orbit-map .sat-marker,
+.orbit-map .pred-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50% !important;
+  box-sizing: border-box;
+  line-height: 1;
+  font-family: "Segoe UI Symbol", "Apple Symbols", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Leaflet controls */
+.orbit-map .leaflet-control-zoom a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.orbit-map .leaflet-control-attribution {
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* Keyboard accessibility */
+.nav button:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* Smaller screens */
+@media (max-width: 720px) {
+  .nav button {
+    min-height: 44px;
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+  }
+
+  .top-actions {
+    gap: 5px;
+  }
+
+  .top-actions .icon-btn {
+    padding: 7px 9px;
+  }
+
+  .orbit-controls {
+    width: 100%;
+  }
+
+  .orbit-controls select,
+  .orbit-controls button {
+    max-width: 100%;
+  }
+}

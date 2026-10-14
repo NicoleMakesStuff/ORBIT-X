@@ -1,0 +1,150 @@
+/* ORBIT-X ground control theme. Load AFTER the inline <style>: <link rel="stylesheet" href="ground-control.css"> as the last item in <head>. */
+:root{
+  --bg:#080b0e;--panel:#0d1216;--panel2:#12191f;--line:#1c262d;--line2:#2a3943;
+  --muted:#71858f;--text:#cdd8dd;
+  --cyan:#4cc9bd;--blue:#5ba6d4;--purple:#9c92cf;
+  --amber:#e3a937;--red:#e8554c;--green:#3fbf75;
+  --mono:'IBM Plex Mono','JetBrains Mono',Consolas,'Courier New',monospace;--sans:var(--mono);
+}
+*{scrollbar-width:thin;scrollbar-color:#2a3943 #0a0e11}
+body{background:var(--bg);font:12px/1.45 var(--mono);color:var(--text);font-variant-numeric:tabular-nums}
+
+/* square, flat, no glow */
+.metric,.panel,.info-card,.station,.alert-item,.system-card,.orbit-kpi,.orbit-note,.search,.icon-btn,.outline-btn,.ack-btn,.tag,.toast,.nav button,.nav .count,.live-pill,.mode-pill,.orbit-label,.brand-mark,.sat-orb,.sat-marker,.pred-marker,.orbit-map,.orbit-map .leaflet-popup-content-wrapper,input,select{border-radius:0!important}
+.metric:after{display:none}
+.panel,.metric,.info-card,.station,.alert-item,.orbit-kpi{box-shadow:none}
+
+/* sidebar */
+.sidebar{background:#090d10;border-right:1px solid var(--line2);padding:0;gap:0}
+.brand{padding:13px 14px;border-bottom:1px solid var(--line2);gap:10px}
+.brand-mark{width:32px;height:32px;background:transparent;border:1px solid var(--cyan);color:var(--cyan);font-size:0;box-shadow:none}
+.brand-mark:before{content:"OX";font:600 12px var(--mono);letter-spacing:.5px}
+.brand-name{font:600 14px var(--mono);letter-spacing:2.5px}
+.brand-sub{font-size:8px;letter-spacing:1px;color:var(--muted);margin-top:2px}
+.sidebar>div:not(.brand):not(.side-bottom){padding-top:14px}
+.nav-label{padding:0 14px 6px;font-size:9px;letter-spacing:1.5px;color:#566872}
+.nav{gap:0}
+.nav button{padding:9px 14px;border:0;border-left:2px solid transparent;font-size:11px;letter-spacing:.4px;color:#9db0b9;gap:10px;background:transparent}
+.nav button:hover{background:#0f161b;color:var(--text)}
+.nav button.active{background:#0e1b1d;border-left-color:var(--cyan);color:var(--cyan)}
+.nav .count{background:var(--red);color:#120606;font-weight:600;padding:1px 6px}
+.system-card{border:0;border-top:1px solid var(--line2);background:transparent;padding:12px 14px}
+.system-title{font-size:9px;letter-spacing:1.4px;color:#566872}
+.system-foot{color:#566872}
+.side-bottom>.system-foot{padding:0 14px 12px!important}
+.dot{box-shadow:none;width:8px;height:8px;border-radius:0}
+.dot.warn{background:var(--amber)}.dot.off{background:var(--red)}
+
+/* top status bar */
+.topbar{height:46px;background:#090d10;border-bottom:1px solid var(--line2);backdrop-filter:none}
+.eyebrow{font-size:9px;letter-spacing:1.4px;color:var(--muted)}
+h1{font:600 14px var(--mono);letter-spacing:.8px;margin:2px 0 0}
+.live-pill,.mode-pill{font-size:10px;letter-spacing:.8px;padding:5px 9px;background:#0a1510;border:1px solid #1f4a35;color:var(--green)}
+.mode-pill{background:#17120a;border-color:#52401c;color:var(--amber)}
+.icon-btn,.outline-btn{background:#0d1317;border:1px solid var(--line2);color:#b4c4cb;font-size:10px;letter-spacing:.6px;padding:7px 11px}
+.icon-btn:hover,.outline-btn:hover{border-color:var(--cyan);color:var(--cyan);background:#0e1a1c}
+
+/* page header */
+.content{max-width:none}
+.page-head{border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+.page-title{font:600 16px var(--mono);letter-spacing:.3px}
+#view-overview .page-title{font-size:0}
+#view-overview .page-title:before{content:"Mission Control";font-size:16px}
+.page-head p{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* readouts */
+.metrics{gap:8px}
+.metric{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--accent,var(--cyan));padding:10px 12px}
+.metric-top{font-size:9px;letter-spacing:1.1px;color:var(--muted)}
+.metric-icon{display:none}
+.metric-value{font:500 26px var(--mono);letter-spacing:0;margin:8px 0 4px}
+.metric-foot{font-size:10px;color:var(--muted)}
+.orbit-kpis{gap:8px}
+.orbit-kpi{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--cyan);padding:10px 12px}
+.orbit-kpi .value{font:500 24px var(--mono);margin:8px 0 3px}
+.orbit-kpi .unit{font-size:9px;letter-spacing:.8px}
+
+/* panels as console windows */
+.layout,.lower-grid{gap:10px}
+.panel{background:var(--panel);border:1px solid var(--line2)}
+.panel-head{background:#0f161b;border-bottom:1px solid var(--line2);padding:7px 12px}
+.panel-title{font-size:10px;font-weight:600;letter-spacing:1.2px;color:#b4c4cb;text-transform:uppercase}
+.panel-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.panel-body{padding:12px}
+
+/* status tags read as indicator lamps */
+.tag{background:transparent;border:1px solid var(--line2);color:var(--muted);font:500 9px var(--mono);letter-spacing:.8px;padding:3px 6px;text-transform:uppercase}
+.tag.good{color:var(--green);border-color:#1f4a35;background:#0a1510}
+.tag.warn{color:var(--amber);border-color:#52401c;background:#17120a}
+.tag.bad{color:var(--red);border-color:#5c2724;background:#190c0b}
+
+/* overview scope: flat polar plot instead of illustrated globe */
+.orbit-stage{background-color:#070b0e;background-image:linear-gradient(#111d24 1px,transparent 1px),linear-gradient(90deg,#111d24 1px,transparent 1px);background-size:30px 30px}
+.orbit-stage:before{display:none}
+.orbit-stage:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(#2a4a52,#2a4a52) center/100% 1px no-repeat,linear-gradient(#2a4a52,#2a4a52) center/1px 100% no-repeat}
+.earth-wrap{background:#091218;box-shadow:none;border:1px solid #2f5560}
+.earth-wrap:before{inset:0;transform:none;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 26px,#1d3a42 26px 27px)}
+.land{display:none}
+.orbit-ring,.orbit-ring.r2,.orbit-ring.r3{border:1px dashed #3f7377}
+.orbit-ring.r2{border-color:#3a6985}.orbit-ring.r3{border-color:#5a5584}
+.sat-point,.sat-point.p2,.sat-point.p3{border-radius:0;width:7px;height:7px;transform:rotate(45deg);box-shadow:none;outline:1px solid #ffffff40;outline-offset:3px}
+.orbit-label{font-size:9px;letter-spacing:.6px;background:#070b0e;border:1px solid var(--line2);color:#8fb5b8}
+.map-note{color:#566872}
+.orbit-legend{border-top:1px solid var(--line2);background:#0a0f13;font-size:10px;color:var(--muted)}
+.legend-dot{border-radius:0}
+
+/* fleet list */
+.sat-row{padding:9px 0;border-bottom:1px solid var(--line)}
+.sat-orb{font-size:0;width:28px;height:28px;background:transparent;border:1px solid var(--line2)}
+.sat-orb:before{content:"";width:7px;height:7px;border:1px solid var(--cyan);transform:rotate(45deg)}
+.sat-name{font-weight:500;font-size:11px}
+.sat-meta{color:var(--muted)}
+
+/* tables */
+.table-wrap{background:var(--panel)}
+table{font-size:11px}
+th{background:#0f161b;font:500 9px var(--mono);letter-spacing:1px;color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--line2);text-transform:uppercase}
+td{padding:8px 12px;border-bottom:1px solid #121a20;color:#c2cfd5}
+tbody tr:nth-child(even){background:#0a0f13}
+tbody tr:hover{background:#101c20}
+.table-main{font-weight:500;color:#e3ecf0}
+.table-sub{color:var(--muted)}
+.search{background:#080b0e;border:1px solid var(--line2);color:var(--text);font-size:11px;padding:7px 10px;min-width:150px}
+.search:focus{border-color:var(--cyan)}
+
+/* alerts */
+.alert-list{gap:6px}
+.alert-item{background:#0b1014;border:1px solid var(--line);padding:9px 10px}
+.alert-stripe{width:3px;border-radius:0}
+.alert-title{font-weight:500;font-size:11px}
+.alert-desc{color:#8ea1aa}
+.alert-time{color:var(--muted)}
+.ack-btn{background:#0d1317;border:1px solid var(--line2);color:#b4c4cb;font-size:9px;letter-spacing:.6px;text-transform:uppercase}
+.ack-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* cards, stations, notes */
+.info-card,.station{background:#0b1014;border:1px solid var(--line)}
+.info-card .big{font-size:18px;font-weight:500;margin:10px 0 4px}
+.info-card p{color:var(--muted)}
+.station-name{font-weight:500}
+.station-coord{color:var(--muted)}
+.section-grid,.station-grid{gap:8px}
+.orbit-note{background:#0a1514;border:1px solid #1c3b38;border-left:3px solid var(--cyan);color:#a4d4cf;font-size:11px}
+.orbit-note.warning{background:#16120a;border-color:#4a3a1a;border-left-color:var(--amber);color:#e3c183}
+.chart{background:#070b0e;border:1px solid var(--line)}
+.toast{background:#0d1a15;border:1px solid #1f4a35;border-left:3px solid var(--green);color:#9ee3bd}
+.toast.error-toast{background:#190c0b;border-color:#5c2724;border-left-color:var(--red);color:#f0a8a3}
+
+/* map: dark tiles, square reticle markers, instrument popups */
+.orbit-map{background:#06090c;border-top:1px solid var(--line2)}
+.orbit-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.62) contrast(1.15) saturate(.35)}
+.orbit-map .leaflet-popup-content-wrapper,.orbit-map .leaflet-popup-tip{background:#0d1317;color:var(--text);border:1px solid var(--line2);box-shadow:none}
+.orbit-map .leaflet-popup-content{font:11px/1.5 var(--mono);margin:10px 12px}
+.sat-marker,.pred-marker{background:transparent;box-shadow:none;font-size:10px}
+.sat-marker{border:1px solid var(--cyan);color:var(--cyan)}
+.pred-marker{border:1px solid #c7a5ff;color:#c7a5ff}
+
+.footer{border-top:1px solid var(--line);margin-top:14px;padding-top:10px;letter-spacing:.6px}
+
+@media(min-width:901px){.content{padding:18px 20px 32px}}
+@media(min-width:1101px){.app{grid-template-columns:208px minmax(0,1fr)}}
